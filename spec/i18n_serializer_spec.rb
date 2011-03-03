@@ -6,7 +6,7 @@ describe I18nSerializer do
     @languages            = I18n.available_locales
     @column               = 'descriptions'
     @singularized         = @column.singularize
-    @avail_locale_getters = @languages.map { |lang| "#{@singularized}_#{lang}" }
+    @avail_locale_helpers = @languages.map { |lang| "#{@singularized}_#{lang}" }
   end
   
   it 'should have a mocked model' do
@@ -17,10 +17,19 @@ describe I18nSerializer do
     Topic.new.should respond_to(@singularized)
   end
   
-  it 'should have a field for each available locale' do
-    @avail_locale_getters.each do |getter|
-      Topic.new.should respond_to(getter)
+  it 'should have a setter for the current locale' do
+    Topic.new.should respond_to("#{@singularized}=")
+  end
+  
+  it 'should have a getter for each available locale' do
+    @avail_locale_helpers.each do |helper|
+      Topic.new.should respond_to(helper)
     end
   end
 
+  it 'should have a setter for each available locale' do
+    @avail_locale_helpers.each do |helper|
+      Topic.new.should respond_to("#{helper}=")
+    end
+  end
 end
