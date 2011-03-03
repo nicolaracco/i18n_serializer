@@ -7,32 +7,24 @@ require 'rspec/core/rake_task'
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
-    gem.name = 'i18n_serializer'
-    gem.summary = %Q{I18n with serialize helper}
-    gem.email = 'nicola@nicolaracco.com'
-    gem.authors = [ 'Nicola Racco' ]
-    gem.add_dependency 'rails', '>= 3.0.5'
+    gem.name        = 'i18n_serializer'
+    gem.summary     = %Q{I18n with serialize helper}
+    gem.description = %Q{Provides some helpers to simplify the use of serialization to manage database i18n management}
+    gem.email       = 'nicola@nicolaracco.com'
+    gem.homepage    = 'http://github.com/nicolaracco/i18n_serializer.git'
+    gem.authors     = [ 'Nicola Racco' ]
+    gem.add_dependency 'rails', '>= 2.3.8'
     gem.add_development_dependency 'rspec',   '>= 2.5.0'
     gem.add_development_dependency 'sqlite3', '>= 1.3.3'
-    # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError
   puts 'Jeweler (or a dependency) not available. Install it with: gem install jeweler'
 end
 
-
-desc 'Run all examples'
-Rspec::Core::RakeTask.new(:spec)
-
 task :default => :spec
 
-require 'rake/rdoctask'
-Rake::RDocTask.new do |rdoc|
-  version = File.exist?('VERSION') ? File.read('VERSION') : ""
-
-  rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = 'i18n_serializer #{version}'
-  #rdoc.rdoc_files.include('README*')
-  rdoc.rdoc_files.include('lib/**/*.rb')
+desc 'Run the specs'
+Rspec::Core::RakeTask.new(:spec) do |t|
+  t.rspec_opts = ['--colour --format progress']
 end
