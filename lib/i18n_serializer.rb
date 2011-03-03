@@ -34,3 +34,5 @@ module I18nSerializer
     end
   end
 end
+
+ActiveRecord::Base.send :include, I18nSerializer
