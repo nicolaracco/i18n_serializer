@@ -1,5 +1,5 @@
 require File.dirname(__FILE__) + '/spec_helper'
-require File.join(File.dirname(__FILE__), 'cases', 'topic')
+require File.join(File.dirname(__FILE__), 'models', 'topic')
 
 describe I18nSerializer do
   before :all do
